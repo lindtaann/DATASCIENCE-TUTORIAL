@@ -17,3 +17,12 @@ probability = model.predict_proba(new_value)
 
 print(f"Prediction for 4.5 hours studied: {prediction[0]} (Pass: 1, Fail: 0)")
 print(f"Probability of passing: {probability[0][1]:.4f}")
+
+_________________________________________
+
+The dataset represents a student's study hours and whether they pass or fail an exam.
+
+Columns in the dataset
+Hours_Studied – The number of hours a student studied.
+
+Passed – Whether the student passed (1) or failed (0) the exam. 
