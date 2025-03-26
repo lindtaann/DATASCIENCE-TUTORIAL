@@ -1,1 +1,26 @@
-TUTORIAL-4
+import numpy as np
+from sklearn.datasets import make_regression
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeRegressor
+
+X, y = make_regression(n_samples=1000, n_features=10, noise=0.1, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+num_trees = 10
+sample_size = int(0.8 * len(X_train))
+
+models = []
+for _ in range(num_trees):
+    sample_indices = np.random.choice(len(X_train), size=sample_size, replace=True)
+    X_sample, y_sample = X_train[sample_indices], y_train[sample_indices]
+    model = DecisionTreeRegressor()
+    model.fit(X_sample, y_sample)
+    models.append(model)
+
+def random_forest_predict(X):
+    predictions = np.array([model.predict(X) for model in models])
+    return np.mean(predictions, axis=0)
+
+y_pred = random_forest_predict(X_test)
+mse = np.mean((y_test - y_pred) ** 2)
+print(f"Mean Squared Error: {mse:.4f}")
