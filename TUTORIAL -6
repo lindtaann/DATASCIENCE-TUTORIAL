@@ -1,0 +1,14 @@
+import numpy as np
+import scipy.cluster.hierarchy as sch
+import matplotlib.pyplot as plt
+
+X = np.array([[1, 2], [3, 2], [4, 4], [5, 6], [8, 8], [10, 10]])
+
+linkage_matrix = sch.linkage(X, method='complete')
+
+plt.figure(figsize=(8, 5))
+sch.dendrogram(linkage_matrix, labels=range(1, len(X) + 1))
+plt.title("Hierarchical Clustering using Complete Linkage")
+plt.xlabel("Data Points")
+plt.ylabel("Distance")
+plt.show()
